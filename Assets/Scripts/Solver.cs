@@ -24,4 +24,9 @@ public class Solver : MonoBehaviour
         GetComponent<Mover>().MoveToPoint(nextPoint);
     }
 
+    public float GetFitness(Vector3 targetPoint)
+    {
+        return (targetPoint - transform.position).magnitude;
+    }
+
 }

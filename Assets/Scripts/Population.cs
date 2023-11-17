@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class Population : MonoBehaviour
 {
-    [SerializeField]
-    public int PopulationSize = 1;
+
     List<Chromosome> chromosomes = new List<Chromosome>();
 
     [SerializeField]
     List<Solver> solvers;
 
-    [SerializeField]
-    Vector3 minVector;
-    [SerializeField]
-    Vector3 maxVector;
-
+    SimulatorSettings settings;
     // Start is called before the first frame update
     void Start()
     {
+        settings = GetComponent<SimulatorSettings>();
         NewPopulation();
     }
 
@@ -30,11 +26,14 @@ public class Population : MonoBehaviour
 
     public void NewPopulation()
     {
-        for(int i = 0; i < PopulationSize; i++)
+        for(int i = 0; i < settings.PopulationSize; i++)
         {
-            Chromosome newChromo = new Chromosome( (minVector,maxVector),10);
+            Chromosome newChromo = new Chromosome( (settings.minVector, settings.maxVector), settings.MaxGenes);
             solvers[i].Chromosome = newChromo;
         }
 
     }
+
+    public void CrossoverPop() { }
+
 }
