@@ -21,7 +21,7 @@ public class SimulatorSettings : MonoBehaviour
     [SerializeField]
     public int PopulationSize = 1;
     [SerializeField]
-    public float MutationChance = .001f;
+    public float MutationChance = .005f;
     [SerializeField]
-    public float CrossoverChance = .6f;
+    public float FittestToKeep = .3f;
 }

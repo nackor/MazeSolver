@@ -5,35 +5,73 @@ using UnityEngine;
 public class Chromosome
 {
 
-    private List<Vector3> genes;
+    public List<Vector3> Genes;
 
     private int geneCounter;
 
+    private Vector3 minGene;
+    private Vector3 maxGene;
+
     public Chromosome((Vector3,Vector3) minMaxGenes,int geneLength)
     {
-        genes = new List<Vector3>();
+        minGene = minMaxGenes.Item1;
+        maxGene = minMaxGenes.Item2;
+        Genes = new List<Vector3>();
         geneCounter = 0;
         for(int i = 0; i < geneLength; i++)
         {
+            
             float x = Random.Range(minMaxGenes.Item1.x, minMaxGenes.Item2.x);
             float y = Random.Range(minMaxGenes.Item1.y, minMaxGenes.Item2.y);
             float z = Random.Range(minMaxGenes.Item1.z, minMaxGenes.Item2.z);
-            genes.Add(new Vector3(x,y,z));
+            Genes.Add(new Vector3(x,y,z));
         }
     }
     public Vector3 NextGene()
     {
         geneCounter++;
-        return genes[geneCounter-1];
+        return Genes[geneCounter-1];
     }
 
     public bool AnyGenes()
     {
-        if(geneCounter >= genes.Count)
+        if(geneCounter >= Genes.Count)
         {
             return false;
         }
         return true;
+    }
+    
+    public void MutateGene(int gene)
+    {
+        float x = Random.Range(minGene.x, maxGene.x);
+        float y = Random.Range(minGene.y, maxGene.y);
+        float z = Random.Range(minGene.z, maxGene.z);
+        Genes[gene] = new Vector3(x, y, z);
+    }
+
+    public void CrossoverGene(Chromosome parent1, Chromosome parent2)
+    {
+        //pick random gene to start
+        int starting = Random.Range(0,Genes.Count);
+        int endSlice = starting + Genes.Count / 2;
+        if(endSlice >= Genes.Count)
+        {
+            endSlice -= Genes.Count;
+        }
+        
+        for (int i = starting; i < starting + Genes.Count / 2; i++)
+        {
+
+        }
+        if(endSlice < starting)
+        {
+            for(int i = 0; i < endSlice; i++)
+            {
+
+            }
+        }
+        //take half from parent two
     }
 
 }
