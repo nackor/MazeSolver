@@ -13,7 +13,7 @@ public class SimulatorSettings : MonoBehaviour
     [SerializeField]
     public Vector3 StartPoint;
     [SerializeField]
-    public Vector3 EndPoint;
+    public GameObject EndPoint;
     [SerializeField]
     public Vector3 minVector;
     [SerializeField]

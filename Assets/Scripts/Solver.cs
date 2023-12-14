@@ -9,7 +9,7 @@ public class Solver : MonoBehaviour
 
     public bool Fit = false;
 
-    public Vector3 TargetPoint;
+    public Vector3 TargetPoint { get; set; }
 
     void Start()
     {
@@ -22,7 +22,6 @@ public class Solver : MonoBehaviour
 
     public void NextAction()
     {
-        Debug.Log("next action");
         if (!Chromosome.AnyGenes()) { return; }
         Vector3 nextPoint = Chromosome.NextGene();
         GetComponent<Mover>().MoveToPoint(nextPoint);
@@ -70,4 +69,12 @@ public class Solver : MonoBehaviour
             }
         }
     }
+
+    public void Reset(Vector3 start)
+    {
+        Chromosome.Reset();
+        transform.position = start;
+        
+    }
+
 }

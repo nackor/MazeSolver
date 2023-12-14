@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Simulator : MonoBehaviour
 {
+    [SerializeField]
+    TextMeshProUGUI GenCounter;
 
     [SerializeField]
     float MoveTime = 1f;
@@ -12,6 +15,8 @@ public class Simulator : MonoBehaviour
     int MoveCounter = 0;
     float moveTimer = 0f;
 
+    int generationCounter = 1;
+
     SimulatorSettings settings;
     Population pop;
     // Start is called before the first frame update
@@ -19,6 +24,7 @@ public class Simulator : MonoBehaviour
     {
         settings = GetComponent<SimulatorSettings>();
         pop = GetComponent<Population>();
+        GenCounter.text = generationCounter.ToString();
     }
 
     // Update is called once per frame
@@ -44,7 +50,13 @@ public class Simulator : MonoBehaviour
 
     void ResetPop()
     {
+        generationCounter++;
+        GenCounter.text = generationCounter.ToString();
         MoveCounter = 0;
-        pop.NewGeneration();
+        pop.NewGeneration(generationCounter);
+        foreach(Solver s in pop.Solvers)
+        {
+            s.Reset(settings.StartPoint);
+        }
     }
 }

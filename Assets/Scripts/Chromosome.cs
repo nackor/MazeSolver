@@ -12,6 +12,8 @@ public class Chromosome
     private Vector3 minGene;
     private Vector3 maxGene;
 
+    public int Generation { get; set; }
+
     public Chromosome((Vector3,Vector3) minMaxGenes,int geneLength)
     {
         minGene = minMaxGenes.Item1;
@@ -54,24 +56,20 @@ public class Chromosome
     {
         //pick random gene to start
         int starting = Random.Range(0,Genes.Count);
-        int endSlice = starting + Genes.Count / 2;
-        if(endSlice >= Genes.Count)
-        {
-            endSlice -= Genes.Count;
-        }
-        
+        int endSlice = (starting + Genes.Count / 2)%Genes.Count;        
         for (int i = starting; i < starting + Genes.Count / 2; i++)
         {
-
+            Genes[i%Genes.Count] = parent1.Genes[i%Genes.Count];
         }
-        if(endSlice < starting)
+        for (int i = endSlice; i < endSlice + Genes.Count / 2; i++)
         {
-            for(int i = 0; i < endSlice; i++)
-            {
-
-            }
+            Genes[i % Genes.Count] = parent2.Genes[i % Genes.Count];
         }
         //take half from parent two
     }
 
+    public void Reset()
+    {
+        geneCounter = 0;
+    }
 }
