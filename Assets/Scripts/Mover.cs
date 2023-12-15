@@ -19,6 +19,7 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Target = transform.position + transform.forward;
         transform.position += (Target - transform.position).normalized * speed * Time.deltaTime;
         if (transform.position.y > 1.01f)
         {
@@ -26,6 +27,11 @@ public class Mover : MonoBehaviour
         }
     }
 
+
+    public void Rotate(int amount)
+    {
+        transform.rotation *= Quaternion.AngleAxis(amount, transform.up);
+    }
     //public void MoveToPoint(Vector3 target)
     //{
     //    this.GetComponent<Rigidbody>().velocity = (target-transform.position).normalized * speed;

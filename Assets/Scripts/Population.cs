@@ -36,7 +36,7 @@ public class Population : MonoBehaviour
             GameObject newSolver = Instantiate(solverPrefab, settings.StartPoint.transform.position,Quaternion.identity);
             Solvers.Add(newSolver.GetComponent<Solver>());
             newSolver.GetComponent<Solver>().TargetPoint = settings.EndPoint.transform.position;
-            Chromosome newChromo = new Chromosome( (settings.minVector, settings.maxVector), settings.MaxGenes);
+            Chromosome newChromo = new Chromosome( (settings.MinRotate, settings.MaxRotate), settings.MaxGenes);
             Solvers[i].Chromosome = newChromo;
             newChromo.Generation = 1;
         }
@@ -55,7 +55,7 @@ public class Population : MonoBehaviour
         {
             if (i > (int)(Solvers.Count * settings.FittestToKeep))
             {
-                Chromosome newChromo = new Chromosome((settings.minVector, settings.maxVector), settings.MaxGenes);
+                Chromosome newChromo = new Chromosome((settings.MinRotate, settings.MaxRotate), settings.MaxGenes);
                 Solvers[i].Chromosome = newChromo;
                 newChromo.Generation = genNumber;
                 //crossover all children

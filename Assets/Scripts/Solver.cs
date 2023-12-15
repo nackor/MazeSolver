@@ -25,8 +25,8 @@ public class Solver : MonoBehaviour
     public void NextAction()
     {
         if (!Chromosome.AnyGenes()) { return; }
-        Vector3 nextPoint = Chromosome.NextGene();
-        GetComponent<Mover>().Target = nextPoint;
+        int rotate = Chromosome.NextGene();
+        GetComponent<Mover>().Rotate(rotate);
     }
 
     public float GetFitness()

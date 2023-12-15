@@ -5,31 +5,46 @@ using UnityEngine;
 public class Chromosome
 {
 
-    public List<Vector3> Genes;
+    public List<int> Genes;
 
     private int geneCounter;
 
-    private Vector3 minGene;
-    private Vector3 maxGene;
+    private int minGene;
+    private int maxGene;
 
     public int Generation { get; set; }
 
-    public Chromosome((Vector3,Vector3) minMaxGenes,int geneLength)
+    //public Chromosome((Vector3,Vector3) minMaxGenes,int geneLength)
+    //{
+
+    //    minGene = minMaxGenes.Item1;
+    //    maxGene = minMaxGenes.Item2;
+    //    Genes = new List<Vector3>();
+    //    geneCounter = 0;
+    //    for(int i = 0; i < geneLength; i++)
+    //    {
+
+    //        float x = Random.Range(minMaxGenes.Item1.x, minMaxGenes.Item2.x);
+    //        float y = Random.Range(minMaxGenes.Item1.y, minMaxGenes.Item2.y);
+    //        float z = Random.Range(minMaxGenes.Item1.z, minMaxGenes.Item2.z);
+    //        Genes.Add(new Vector3(x,y,z));
+    //    }
+    //}
+
+
+    public Chromosome((int,int)minMaxGenes, int geneLength)
     {
+
         minGene = minMaxGenes.Item1;
         maxGene = minMaxGenes.Item2;
-        Genes = new List<Vector3>();
+        Genes = new List<int>();
         geneCounter = 0;
-        for(int i = 0; i < geneLength; i++)
+        for (int i = 0; i < geneLength; i++)
         {
-            
-            float x = Random.Range(minMaxGenes.Item1.x, minMaxGenes.Item2.x);
-            float y = Random.Range(minMaxGenes.Item1.y, minMaxGenes.Item2.y);
-            float z = Random.Range(minMaxGenes.Item1.z, minMaxGenes.Item2.z);
-            Genes.Add(new Vector3(x,y,z));
+            Genes.Add(Random.Range(minMaxGenes.Item1, minMaxGenes.Item2));
         }
     }
-    public Vector3 NextGene()
+    public int NextGene()
     {
         geneCounter++;
         return Genes[geneCounter-1];
@@ -43,15 +58,19 @@ public class Chromosome
         }
         return true;
     }
-    
+
+    //public void MutateGene(int gene)
+    //{
+    //    float x = Random.Range(minGene.x, maxGene.x);
+    //    float y = Random.Range(minGene.y, maxGene.y);
+    //    float z = Random.Range(minGene.z, maxGene.z);
+    //    Genes[gene] = new Vector3(x, y, z);
+    //}
+
     public void MutateGene(int gene)
     {
-        float x = Random.Range(minGene.x, maxGene.x);
-        float y = Random.Range(minGene.y, maxGene.y);
-        float z = Random.Range(minGene.z, maxGene.z);
-        Genes[gene] = new Vector3(x, y, z);
+        Genes[gene] = Random.Range(minGene, maxGene);
     }
-
     public void CrossoverGene(Chromosome parent1, Chromosome parent2)
     {
         //pick random gene to start

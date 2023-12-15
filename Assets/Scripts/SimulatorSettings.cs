@@ -14,10 +14,15 @@ public class SimulatorSettings : MonoBehaviour
     public GameObject StartPoint;
     [SerializeField]
     public GameObject EndPoint;
+
     [SerializeField]
-    public Vector3 minVector;
+    public int MinRotate;
     [SerializeField]
-    public Vector3 maxVector;
+    public int MaxRotate;
+    //[SerializeField]
+    //public Vector3 minVector;
+    //[SerializeField]
+    //public Vector3 maxVector;
     [SerializeField]
     public int PopulationSize = 1;
     [SerializeField]
