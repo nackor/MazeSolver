@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    [SerializeField]
-    public float Speed = 1f;
+    float speed = 0f;
+
+
+    public Vector3 Target { get; set; }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        speed = FindObjectOfType<SimulatorSettings>().SolverSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += (Target - transform.position).normalized * speed * Time.deltaTime;
+        if (transform.position.y > 1.01f)
+        {
+            transform.position = new Vector3(transform.position.x,1f,transform.position.z);
+        }
     }
 
-    public void MoveToPoint(Vector3 target)
-    {
-        this.GetComponent<Rigidbody>().velocity = (target-transform.position).normalized*Speed;
-    }
+    //public void MoveToPoint(Vector3 target)
+    //{
+    //    this.GetComponent<Rigidbody>().velocity = (target-transform.position).normalized * speed;
+    //}
 }

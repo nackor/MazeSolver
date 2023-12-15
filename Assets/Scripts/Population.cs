@@ -33,7 +33,7 @@ public class Population : MonoBehaviour
 
         for(int i = 0; i < settings.PopulationSize; i++)
         {
-            GameObject newSolver = Instantiate(solverPrefab, settings.StartPoint,Quaternion.identity);
+            GameObject newSolver = Instantiate(solverPrefab, settings.StartPoint.transform.position,Quaternion.identity);
             Solvers.Add(newSolver.GetComponent<Solver>());
             newSolver.GetComponent<Solver>().TargetPoint = settings.EndPoint.transform.position;
             Chromosome newChromo = new Chromosome( (settings.minVector, settings.maxVector), settings.MaxGenes);
@@ -74,7 +74,12 @@ public class Population : MonoBehaviour
 
                 }
                 newChromo.CrossoverGene(parent1.Chromosome, parent2.Chromosome);
+                Solvers[i].GetComponent<MeshRenderer>().material.color = Color.white;
 
+            }
+            else
+            {
+                Solvers[i].GetComponent<MeshRenderer>().material.color = Color.green;
             }
 
 

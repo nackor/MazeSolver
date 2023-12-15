@@ -9,11 +9,9 @@ public class Simulator : MonoBehaviour
     TextMeshProUGUI GenCounter;
 
     [SerializeField]
-    float MoveTime = 1f;
-
-    [SerializeField]
     int MoveCounter = 0;
     float moveTimer = 0f;
+    float maxMove = 0f;
 
     int generationCounter = 1;
 
@@ -25,6 +23,7 @@ public class Simulator : MonoBehaviour
         settings = GetComponent<SimulatorSettings>();
         pop = GetComponent<Population>();
         GenCounter.text = generationCounter.ToString();
+        maxMove = settings.SimulationTime;
     }
 
     // Update is called once per frame
@@ -35,7 +34,7 @@ public class Simulator : MonoBehaviour
             ResetPop();
             return; 
         }
-        if(moveTimer > MoveTime)
+        if(moveTimer > maxMove)
         {
             MoveCounter++;
             moveTimer = 0f;
@@ -56,7 +55,24 @@ public class Simulator : MonoBehaviour
         pop.NewGeneration(generationCounter);
         foreach(Solver s in pop.Solvers)
         {
-            s.Reset(settings.StartPoint);
+            s.Reset(settings.StartPoint.transform.position);
         }
     }
+
+    public void PauseSimulation() 
+    {
+        if(Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            return;
+        }
+        Time.timeScale = 0;
+    }
+
+    public void ChangeTime(float value)
+    {
+        Time.timeScale = value;
+    }
+
+
 }

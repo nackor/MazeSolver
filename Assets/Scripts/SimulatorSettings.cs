@@ -11,7 +11,7 @@ public class SimulatorSettings : MonoBehaviour
     [SerializeField]
     public int MaxGenes = 10;
     [SerializeField]
-    public Vector3 StartPoint;
+    public GameObject StartPoint;
     [SerializeField]
     public GameObject EndPoint;
     [SerializeField]
@@ -24,4 +24,11 @@ public class SimulatorSettings : MonoBehaviour
     public float MutationChance = .005f;
     [SerializeField]
     public float FittestToKeep = .3f;
+    [SerializeField]
+    public float Distance = 1f;
+
+    private void Start()
+    {
+        SolverSpeed = Distance / SimulationTime;
+    }
 }

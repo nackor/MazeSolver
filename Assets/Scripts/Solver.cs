@@ -11,6 +11,8 @@ public class Solver : MonoBehaviour
 
     public Vector3 TargetPoint { get; set; }
 
+    public float Fitness { get { return GetFitness(); } }
+
     void Start()
     {
     }
@@ -24,7 +26,7 @@ public class Solver : MonoBehaviour
     {
         if (!Chromosome.AnyGenes()) { return; }
         Vector3 nextPoint = Chromosome.NextGene();
-        GetComponent<Mover>().MoveToPoint(nextPoint);
+        GetComponent<Mover>().Target = nextPoint;
     }
 
     public float GetFitness()
@@ -77,4 +79,8 @@ public class Solver : MonoBehaviour
         
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Reached End");
+    }
 }
