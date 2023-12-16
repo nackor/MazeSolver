@@ -84,9 +84,7 @@ public class Chromosome
         {
             Genes[i % Genes.Count] = parent2.Genes[i % Genes.Count];
         }
-        //take half from parent two
     }
-
     public void Reset()
     {
         geneCounter = 0;

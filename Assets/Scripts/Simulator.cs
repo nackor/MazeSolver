@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class Simulator : MonoBehaviour
 {
     [SerializeField]
     TextMeshProUGUI GenCounter;
+    [SerializeField]
+    TextMeshProUGUI SuccessCounter;
 
     [SerializeField]
     int MoveCounter = 0;
@@ -24,6 +27,7 @@ public class Simulator : MonoBehaviour
         pop = GetComponent<Population>();
         GenCounter.text = generationCounter.ToString();
         maxMove = settings.SimulationTime;
+        moveTimer = maxMove+1;
     }
 
     // Update is called once per frame
@@ -45,6 +49,8 @@ public class Simulator : MonoBehaviour
             }
         }
         moveTimer += Time.deltaTime;
+        SuccessCounter.text = (pop.Solvers.Where(sol => sol.Finished == true)).Count<Solver>().ToString();
+
     }
 
     void ResetPop()
@@ -57,6 +63,7 @@ public class Simulator : MonoBehaviour
         {
             s.Reset(settings.StartPoint.transform.position);
         }
+        
     }
 
     public void PauseSimulation() 

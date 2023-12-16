@@ -13,6 +13,10 @@ public class Solver : MonoBehaviour
 
     public float Fitness { get { return GetFitness(); } }
 
+    public float PrevGenFit { get; set; }
+
+    public bool Finished = false;
+
     void Start()
     {
     }
@@ -39,6 +43,7 @@ public class Solver : MonoBehaviour
     }
     public static int CompareSolver(Solver leftHand, Solver rightHand)
     {
+        
         if (leftHand == null)
         {
             if (rightHand == null)
@@ -74,13 +79,19 @@ public class Solver : MonoBehaviour
 
     public void Reset(Vector3 start)
     {
+        PrevGenFit = GetFitness();
         Chromosome.Reset();
+        GetComponent<Mover>().Reset();
         transform.position = start;
+        transform.rotation = Quaternion.identity;
+        Finished = false;
         
     }
 
     public void OnTriggerEnter(Collider other)
     {
         Debug.Log("Reached End");
+        Finished = true;
+        GetComponent<Mover>().Finished();
     }
 }
