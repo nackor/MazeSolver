@@ -64,6 +64,10 @@ public class Solver : MonoBehaviour
             }
             else
             {
+                //lets check who can see the endpoint
+                //then lets check who has gona farthest from the beginning
+                //then do newly discovered land?
+                //doing a grid
                 if (leftHand.GetFitness() < rightHand.GetFitness())
                 {
                     return -1;

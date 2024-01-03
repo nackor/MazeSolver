@@ -53,7 +53,12 @@ public class Population : MonoBehaviour
         bool newParents = true;
         for (int i = 0; i < Solvers.Count; i++)
         {
-            if (i > (int)(Solvers.Count * settings.FittestToKeep))
+            //if the Solver is really high in fitness or it finished maze keep it. 
+            if (i < (int)(Solvers.Count * settings.FittestToKeep) || Solvers[i].Finished)
+            {
+                Solvers[i].GetComponent<MeshRenderer>().material.color = Color.green;
+            }
+            else
             {
                 Chromosome newChromo = new Chromosome((settings.MinRotate, settings.MaxRotate), settings.MaxGenes);
                 Solvers[i].Chromosome = newChromo;
@@ -75,11 +80,6 @@ public class Population : MonoBehaviour
                 }
                 newChromo.CrossoverGene(parent1.Chromosome, parent2.Chromosome);
                 Solvers[i].GetComponent<MeshRenderer>().material.color = Color.white;
-
-            }
-            else
-            {
-                Solvers[i].GetComponent<MeshRenderer>().material.color = Color.green;
             }
 
 
